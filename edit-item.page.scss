@@ -1,0 +1,53 @@
+ion-content {
+  --background: #f5f7f9;
+}
+
+form {
+  background: white;
+  border-radius: 12px;
+  margin: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+ion-list {
+  background: transparent;
+  padding: 0;
+}
+
+ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --inner-padding-end: 0;
+
+  ion-label[position="stacked"] {
+    font-weight: 500;
+    color: #2c3e50;
+    margin-bottom: 8px;
+  }
+}
+
+ion-note {
+  padding: 0 16px;
+  display: block;
+  margin-top: -8px;
+  margin-bottom: 16px;
+  font-size: 0.85rem;
+}
+
+ion-datetime {
+  padding-left: 0;
+}
+
+// Style for the condition select
+ion-select[multiple] {
+  ::ng-deep .select-icon {
+    display: none;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  form {
+    margin: 8px;
+  }
+}

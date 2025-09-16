@@ -1,0 +1,133 @@
+ion-content {
+  --background: #f5f7f9;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+}
+
+.all-items-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.summary-card {
+  text-align: center;
+  border-radius: 12px;
+  background: white;
+  margin-bottom: 0;
+
+  ion-card-content {
+    padding: 16px 8px;
+  }
+
+  ion-label h2 {
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #2c3e50;
+  }
+
+  ion-label h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    color: #2c3e50;
+  }
+}
+
+ion-list {
+  background: transparent;
+
+  ion-item {
+    --background: white;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --inner-padding-end: 0;
+    margin-bottom: 8px;
+    border-radius: 12px;
+    cursor: pointer;
+
+    ion-avatar {
+      margin-right: 16px;
+
+      img {
+        width: 48px;
+        height: 48px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+    }
+
+    ion-label {
+      h2 {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 6px;
+      }
+
+      p {
+        color: #7f8c8d;
+        margin: 0 0 8px 0;
+        font-size: 0.9rem;
+      }
+    }
+
+    ion-note {
+      text-align: right;
+
+      h3 {
+        margin: 0 0 4px 0;
+        font-weight: 600;
+        color: #2c3e50;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.8rem;
+        color: #7f8c8d;
+      }
+    }
+
+    &:hover {
+      --background: #f8f9fa;
+    }
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+
+  ion-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    color: #bdc3c7;
+  }
+
+  h3 {
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  p {
+    color: #7f8c8d;
+    margin-bottom: 24px;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .summary-card {
+    ion-label h1 {
+      font-size: 1.5rem;
+    }
+  }
+
+  ion-item {
+    ion-note {
+      display: none;
+    }
+  }
+}

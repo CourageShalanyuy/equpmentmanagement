@@ -1,0 +1,115 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>All Inventory Items</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleSortOrder()">
+        <ion-icon
+          [name]="sortAscending ? 'arrow-up' : 'arrow-down'"
+          class="ion-margin-end"
+        ></ion-icon>
+        {{ sortAscending ? 'Oldest' : 'Newest' }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="all-items-container">
+    <!-- Summary Cards -->
+    <ion-grid class="ion-margin-bottom">
+      <ion-row>
+        <ion-col size="6" size-md="3">
+          <ion-card class="summary-card">
+            <ion-card-content>
+              <ion-label>
+                <h2>Total Items</h2>
+                <h1>{{ inventorySummary.totalItems }}</h1>
+              </ion-label>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="3">
+          <ion-card class="summary-card">
+            <ion-card-content>
+              <ion-label color="success">
+                <h2>Good Condition</h2>
+                <h1>{{ inventorySummary.goodCondition }}</h1>
+              </ion-label>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="3">
+          <ion-card class="summary-card">
+            <ion-card-content>
+              <ion-label color="warning">
+                <h2>Needs Maintenance</h2>
+                <h1>{{ inventorySummary.needsMaintenance }}</h1>
+              </ion-label>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="3">
+          <ion-card class="summary-card">
+            <ion-card-content>
+              <ion-label color="danger">
+                <h2>Damaged</h2>
+                <h1>{{ inventorySummary.damaged }}</h1>
+              </ion-label>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Inventory Items -->
+    <ion-list lines="full">
+      <ion-item
+        *ngFor="let item of sortedItems"
+        (click)="viewItemDetails(item)"
+        detail="true"
+      >
+        <ion-avatar slot="start">
+          <img
+            [src]="item.imageUrl || 'assets/placeholder-item.png'"
+            [alt]="item.name"
+          />
+        </ion-avatar>
+
+        <ion-label>
+          <h2>{{ item.name }}</h2>
+          <p>{{ item.category }} • {{ item.location }}</p>
+          <p>
+            <ion-badge
+              [color]="getStatusColor(item.status)"
+              class="ion-margin-end"
+            >
+              {{ item.status }}
+            </ion-badge>
+            <ion-badge color="medium">Qty: {{ item.quantity }}</ion-badge>
+          </p>
+        </ion-label>
+
+        <ion-note slot="end" color="primary">
+          <h3>
+            {{ item.price * item.quantity | currency:'XOF':'symbol':'1.0-0' }}
+          </h3>
+          <p>{{ item.purchaseDate | date:'M/d/yyyy' }}</p>
+        </ion-note>
+      </ion-item>
+    </ion-list>
+
+    <!-- Empty State -->
+    <div *ngIf="inventoryItems.length === 0" class="empty-state">
+      <ion-icon name="cube" color="medium"></ion-icon>
+      <h3>No Inventory Items</h3>
+      <p>Get started by adding your first item</p>
+      <ion-button (click)="navigateToAddItem()" color="primary">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Add Item
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

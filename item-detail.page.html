@@ -1,0 +1,126 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Item Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="editItem()">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="item-detail-container" *ngIf="item">
+    <!-- Item Image -->
+    <div class="item-image-section">
+      <img
+        [src]="item.imageUrl || 'assets/placeholder-item.png'"
+        [alt]="item.name"
+        class="detail-image"
+      />
+      <div
+        class="item-status-badge"
+        [class]="item.status.toLowerCase().replace(' ', '-')"
+      >
+        {{ item.status }}
+      </div>
+    </div>
+
+    <!-- Item Details -->
+    <ion-card class="detail-card">
+      <ion-card-header>
+        <ion-card-title>{{ item.name }}</ion-card-title>
+        <ion-card-subtitle
+          >{{ item.category }} • {{ item.location }}</ion-card-subtitle
+        >
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item>
+            <ion-label>
+              <h3>Description</h3>
+              <p>{{ item.description || 'No description available' }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>
+              <h3>Quantity</h3>
+              <p>{{ item.quantity }} units</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>
+              <h3>Total Value</h3>
+              <p>
+                {{ item.price * item.quantity | currency:'XOF':'symbol':'1.0-0'
+                }}
+              </p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>
+              <h3>Price per Unit</h3>
+              <p>{{ item.price | currency:'XOF':'symbol':'1.0-0' }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>
+              <h3>Purchase Date</h3>
+              <p>{{ item.purchaseDate | date:'fullDate' }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Condition Details -->
+    <ion-card class="condition-card">
+      <ion-card-header>
+        <ion-card-title>Condition Details</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="condition-list">
+          <div
+            *ngFor="let condition of getConditionStatuses(item); let i = index"
+            class="condition-item"
+          >
+            <ion-badge
+              [color]="getStatusColor(condition)"
+              class="condition-badge"
+            >
+              Item {{ i + 1 }}: {{ condition }}
+            </ion-badge>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <ion-button expand="block" color="primary" (click)="editItem()">
+        <ion-icon slot="start" name="create-outline"></ion-icon>
+        Edit Item
+      </ion-button>
+
+      <ion-button expand="block" color="danger" (click)="deleteItem()">
+        <ion-icon slot="start" name="trash-outline"></ion-icon>
+        Delete Item
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="!item" class="loading-state">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Loading item details...</p>
+  </div>
+</ion-content>

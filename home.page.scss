@@ -1,0 +1,329 @@
+// Color variables for a professional theme
+:root {
+  --primary-color: #2c3e50;
+  --primary-shade: #1a252f;
+  --primary-tint: #3c5465;
+  --secondary-color: #ecf0f1;
+  --accent-color: #3498db;
+  --success-color: #27ae60;
+  --warning-color: #f39c12;
+  --danger-color: #e74c3c;
+}
+
+ion-content {
+  --background: #f5f7f9;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+}
+
+ion-toolbar {
+  --background: var(--primary-color);
+  --color: white;
+}
+
+.inventory-searchbar {
+  max-width: 300px;
+
+  .searchbar-input {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
+
+.summary-card {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 12px;
+  background: white;
+  margin-bottom: 0;
+
+  ion-card-content {
+    padding: 16px 8px;
+  }
+
+  ion-label h2 {
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+  }
+
+  ion-label h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--primary-color);
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  &.active {
+    background: var(--primary-color);
+
+    ion-label h2,
+    ion-label h1 {
+      color: white;
+    }
+  }
+}
+
+.inventory-container {
+  .section-title {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 24px 0 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--primary-tint);
+  }
+}
+
+.inventory-item-card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  gap: 16px;
+
+  .item-image-container {
+    position: relative;
+    flex-shrink: 0;
+
+    .item-image {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .item-status {
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid white;
+
+      &.good {
+        background: var(--success-color);
+      }
+
+      &.needs-maintenance {
+        background: var(--warning-color);
+      }
+
+      &.damaged {
+        background: var(--danger-color);
+      }
+    }
+  }
+
+  .item-content {
+    flex-grow: 1;
+    min-width: 0;
+  }
+
+  .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+
+    .item-name {
+      color: var(--primary-color);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .item-price {
+      color: var(--primary-color);
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+  }
+
+  .item-details {
+    margin-bottom: 16px;
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+
+      .detail-label {
+        color: var(--primary-tint);
+        font-weight: 500;
+      }
+
+      .detail-value {
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+    }
+  }
+
+  .item-conditions {
+    margin-bottom: 16px;
+
+    .condition-title {
+      color: var(--primary-tint);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .condition-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      .condition-tag {
+        padding: 4px 12px;
+        border-radius: 16px;
+        font-size: 0.85rem;
+        font-weight: 500;
+
+        &.good {
+          background: rgba(var(--ion-color-success-rgb), 0.1);
+          color: var(--ion-color-success);
+        }
+
+        &.damaged {
+          background: rgba(var(--ion-color-danger-rgb), 0.1);
+          color: var(--ion-color-danger);
+        }
+
+        &:not(.good):not(.damaged) {
+          background: rgba(var(--ion-color-medium-rgb), 0.1);
+          color: var(--ion-color-medium);
+        }
+      }
+    }
+  }
+
+  .detail-btn {
+    --border-radius: 8px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+
+  .empty-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    color: var(--primary-tint);
+    opacity: 0.5;
+  }
+
+  h3 {
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  p {
+    color: var(--primary-tint);
+    margin-bottom: 24px;
+  }
+}
+
+// Popover menu styles
+ion-popover {
+  --width: 300px;
+
+  ion-list {
+    padding: 8px 0;
+  }
+
+  ion-item {
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --min-height: 48px;
+
+    ion-icon {
+      color: var(--primary-tint);
+      font-size: 20px;
+    }
+
+    ion-label {
+      font-weight: 500;
+      color: var(--primary-color);
+    }
+
+    ion-badge {
+      font-weight: 600;
+    }
+
+    &.active {
+      --background: rgba(var(--primary-color-rgb), 0.1);
+
+      ion-icon,
+      ion-label {
+        color: var(--primary-color);
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .inventory-searchbar {
+    max-width: 200px;
+  }
+
+  .inventory-item-card {
+    flex-direction: column;
+
+    .item-image-container {
+      align-self: center;
+
+      .item-image {
+        width: 100%;
+        height: 200px;
+      }
+    }
+
+    .item-header {
+      flex-direction: column;
+
+      .item-price {
+        margin-top: 8px;
+      }
+    }
+  }
+  // Add these styles to your existing home.page.scss
+
+  .category-section {
+    margin-bottom: 24px;
+
+    .category-title {
+      color: var(--primary-color);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 16px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--primary-tint);
+    }
+  }
+
+  // Rest of your existing SCSS remains the same
+}

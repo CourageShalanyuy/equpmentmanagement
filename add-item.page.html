@@ -1,0 +1,174 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add New Item</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="saveItem()" [disabled]="!itemForm.valid">
+        Save
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="itemForm" (ngSubmit)="saveItem()">
+    <ion-list lines="full" class="ion-padding">
+      <ion-list-header>
+        <ion-label>Item Information</ion-label>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label position="stacked">Name *</ion-label>
+        <ion-input
+          formControlName="name"
+          type="text"
+          placeholder="Enter item name"
+        ></ion-input>
+      </ion-item>
+      <ion-note
+        color="danger"
+        *ngIf="itemForm.get('name')?.hasError('required') && itemForm.get('name')?.touched"
+      >
+        Name is required
+      </ion-note>
+
+      <ion-item>
+        <ion-label position="stacked">Description</ion-label>
+        <ion-textarea
+          formControlName="description"
+          rows="4"
+          placeholder="Enter item description"
+        ></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Category *</ion-label>
+        <ion-select formControlName="category" placeholder="Select category">
+          <ion-select-option value="Furniture">Furniture</ion-select-option>
+          <ion-select-option value="Electronics">Electronics</ion-select-option>
+          <ion-select-option value="Office Supplies"
+            >Office Supplies</ion-select-option
+          >
+          <ion-select-option value="IT Equipment"
+            >IT Equipment</ion-select-option
+          >
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-note
+        color="danger"
+        *ngIf="itemForm.get('category')?.hasError('required') && itemForm.get('category')?.touched"
+      >
+        Category is required
+      </ion-note>
+
+      <ion-item>
+        <ion-label position="stacked">Location *</ion-label>
+        <ion-input
+          formControlName="location"
+          type="text"
+          placeholder="Enter location"
+        ></ion-input>
+      </ion-item>
+      <ion-note
+        color="danger"
+        *ngIf="itemForm.get('location')?.hasError('required') && itemForm.get('location')?.touched"
+      >
+        Location is required
+      </ion-note>
+
+      <ion-item>
+        <ion-label position="stacked">Quantity *</ion-label>
+        <ion-input
+          formControlName="quantity"
+          type="number"
+          placeholder="Enter quantity"
+        ></ion-input>
+      </ion-item>
+      <ion-note
+        color="danger"
+        *ngIf="itemForm.get('quantity')?.hasError('required') && itemForm.get('quantity')?.touched"
+      >
+        Quantity is required
+      </ion-note>
+      <ion-note
+        color="danger"
+        *ngIf="itemForm.get('quantity')?.hasError('min') && itemForm.get('quantity')?.touched"
+      >
+        Quantity must be at least 1
+      </ion-note>
+
+      <ion-item>
+        <ion-label position="stacked">Price (CFA) *</ion-label>
+        <ion-input
+          formControlName="price"
+          type="number"
+          placeholder="Enter price in CFA"
+        ></ion-input>
+      </ion-item>
+      <ion-note
+        color="danger"
+        *ngIf="itemForm.get('price')?.hasError('required') && itemForm.get('price')?.touched"
+      >
+        Price is required
+      </ion-note>
+      <ion-note
+        color="danger"
+        *ngIf="itemForm.get('price')?.hasError('min') && itemForm.get('price')?.touched"
+      >
+        Price must be greater than 0
+      </ion-note>
+
+      <ion-item>
+        <ion-label position="stacked">Status *</ion-label>
+        <ion-select formControlName="status" placeholder="Select status">
+          <ion-select-option value="Good">Good</ion-select-option>
+          <ion-select-option value="Needs Maintenance"
+            >Needs Maintenance</ion-select-option
+          >
+          <ion-select-option value="Damaged">Damaged</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Purchase Date</ion-label>
+        <ion-datetime
+          formControlName="purchaseDate"
+          presentation="date"
+          placeholder="Select purchase date"
+        ></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Image URL</ion-label>
+        <ion-input
+          formControlName="imageUrl"
+          type="text"
+          placeholder="Enter image URL"
+        ></ion-input>
+      </ion-item>
+
+      <!-- Condition statuses for multiple items -->
+      <ion-item>
+        <ion-label position="stacked">Individual Item Conditions</ion-label>
+        <ion-select
+          formControlName="conditionStatuses"
+          multiple="true"
+          placeholder="Select conditions (for multiple items)"
+        >
+          <ion-select-option value="Good">Good</ion-select-option>
+          <ion-select-option value="Needs Maintenance"
+            >Needs Maintenance</ion-select-option
+          >
+          <ion-select-option value="Damaged">Damaged</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-note>
+        Select multiple conditions if you're adding multiple items with
+        different conditions
+      </ion-note>
+    </ion-list>
+  </form>
+</ion-content>
